@@ -27,6 +27,7 @@ const loadCharacters = async () => {
 
 const generateAvatar = async (element) => {
   const res = await fetch(ROBO_GENERATOR_URL + element.name + "AVATAR_SIZE");
+  //TODO try to use BLOB, base64
   //TODO return ...;
 };
 
@@ -49,8 +50,9 @@ const displayCharacters = (characters) => {
   const htmlString = characters
     .map((character) => {
       return `
-      <ul>
-        <li class="character">
+      <div class="card-container"> 
+        <ul>
+          <li class="character">
             <h2>${character.name}</h2>
             <p>Company: ${character.company.name}</p>
             <p>Job: ${character.company.catchPhrase}</p>
@@ -58,8 +60,9 @@ const displayCharacters = (characters) => {
             <p>E-mail: ${character.email}</p>
             <p>WEB: ${character.website}</p>
             <img src="${character.image}"></img>
-       </li>
-       </ul>
+          </li>
+         </ul>
+       </div>
          `;
     })
     .join("");
