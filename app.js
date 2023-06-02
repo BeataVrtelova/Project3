@@ -10,6 +10,8 @@ icon.addEventListener("click", function () {
 });
 
 let allCharacter;
+let nameParts;
+let nameIsSuitable;
 
 loadCharacters().then((loaded) => {
   allCharacter = loaded;
@@ -23,10 +25,18 @@ const getInput = () => {
 const filterUsers = (pattern) => {
   let patternLength = pattern.length;
   const filteredArray = allCharacter.filter((character) => {
-    return (
-      character.name.substring(0, patternLength).toUpperCase() ==
-      pattern.toUpperCase()
-    );
+    nameParts = character.name.split(" ");
+    nameIsSuitable = false;
+    nameParts.forEach(function (namePart) {
+      if (
+        namePart.substring(0, patternLength).toUpperCase() ==
+        pattern.toUpperCase()
+      ) {
+        nameIsSuitable = true;
+      }
+    });
+
+    return nameIsSuitable;
   });
   return filteredArray;
 };
